@@ -1,0 +1,37 @@
+module Dedalus
+  module Models
+    module Machines
+      type terminal_input_event =
+        {
+          data: String,
+          type: Dedalus::Models::Machines::TerminalInputEvent::type_
+        }
+
+      class TerminalInputEvent < Dedalus::Internal::Type::BaseModel
+        attr_accessor data: String
+
+        attr_accessor type: Dedalus::Models::Machines::TerminalInputEvent::type_
+
+        def initialize: (
+          data: String,
+          type: Dedalus::Models::Machines::TerminalInputEvent::type_
+        ) -> void
+
+        def to_hash: -> {
+          data: String,
+          type: Dedalus::Models::Machines::TerminalInputEvent::type_
+        }
+
+        type type_ = :input
+
+        module Type
+          extend Dedalus::Internal::Type::Enum
+
+          INPUT: :input
+
+          def self?.values: -> ::Array[Dedalus::Models::Machines::TerminalInputEvent::type_]
+        end
+      end
+    end
+  end
+end

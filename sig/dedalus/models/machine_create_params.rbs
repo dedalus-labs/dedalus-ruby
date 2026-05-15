@@ -1,0 +1,15 @@
+module Dedalus
+  module Models
+    type machine_create_params =
+      {  } & Dedalus::Internal::Type::request_parameters
+
+    class MachineCreateParams < Dedalus::Models::CreateParams
+      extend Dedalus::Internal::Type::RequestParameters::Converter
+      include Dedalus::Internal::Type::RequestParameters
+
+      def initialize: (?request_options: Dedalus::request_opts) -> void
+
+      def to_hash: -> { request_options: Dedalus::RequestOptions }
+    end
+  end
+end

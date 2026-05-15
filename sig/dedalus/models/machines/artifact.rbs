@@ -1,0 +1,77 @@
+module Dedalus
+  module Models
+    module Machines
+      type artifact =
+        {
+          artifact_id: String,
+          created_at: Time,
+          machine_id: String,
+          name: String,
+          size_bytes: Integer,
+          download_url: String,
+          execution_id: String,
+          expires_at: Time,
+          mime_type: String,
+          :sha256 => String
+        }
+
+      class Artifact < Dedalus::Internal::Type::BaseModel
+        attr_accessor artifact_id: String
+
+        attr_accessor created_at: Time
+
+        attr_accessor machine_id: String
+
+        attr_accessor name: String
+
+        attr_accessor size_bytes: Integer
+
+        attr_reader download_url: String?
+
+        def download_url=: (String) -> String
+
+        attr_reader execution_id: String?
+
+        def execution_id=: (String) -> String
+
+        attr_reader expires_at: Time?
+
+        def expires_at=: (Time) -> Time
+
+        attr_reader mime_type: String?
+
+        def mime_type=: (String) -> String
+
+        attr_reader sha256: String?
+
+        def sha256=: (String) -> String
+
+        def initialize: (
+          artifact_id: String,
+          created_at: Time,
+          machine_id: String,
+          name: String,
+          size_bytes: Integer,
+          ?download_url: String,
+          ?execution_id: String,
+          ?expires_at: Time,
+          ?mime_type: String,
+          ?sha256: String
+        ) -> void
+
+        def to_hash: -> {
+          artifact_id: String,
+          created_at: Time,
+          machine_id: String,
+          name: String,
+          size_bytes: Integer,
+          download_url: String,
+          execution_id: String,
+          expires_at: Time,
+          mime_type: String,
+          :sha256 => String
+        }
+      end
+    end
+  end
+end

@@ -1,0 +1,79 @@
+module Dedalus
+  module Models
+    type lifecycle_status =
+      {
+        last_progress_at: Time,
+        last_transition_at: Time,
+        phase: Dedalus::Models::LifecycleStatus::phase,
+        reason: String,
+        retryable: bool,
+        revision: String,
+        last_error: String
+      }
+
+    class LifecycleStatus < Dedalus::Internal::Type::BaseModel
+      attr_accessor last_progress_at: Time
+
+      attr_accessor last_transition_at: Time
+
+      attr_accessor phase: Dedalus::Models::LifecycleStatus::phase
+
+      attr_accessor reason: String
+
+      attr_accessor retryable: bool
+
+      attr_accessor revision: String
+
+      attr_reader last_error: String?
+
+      def last_error=: (String) -> String
+
+      def initialize: (
+        last_progress_at: Time,
+        last_transition_at: Time,
+        phase: Dedalus::Models::LifecycleStatus::phase,
+        reason: String,
+        retryable: bool,
+        revision: String,
+        ?last_error: String
+      ) -> void
+
+      def to_hash: -> {
+        last_progress_at: Time,
+        last_transition_at: Time,
+        phase: Dedalus::Models::LifecycleStatus::phase,
+        reason: String,
+        retryable: bool,
+        revision: String,
+        last_error: String
+      }
+
+      type phase =
+        :accepted
+        | :placement_pending
+        | :starting
+        | :running
+        | :stopping
+        | :sleeping
+        | :destroying
+        | :destroyed
+        | :failed
+
+      module Phase
+        extend Dedalus::Internal::Type::Enum
+
+        ACCEPTED: :accepted
+        PLACEMENT_PENDING: :placement_pending
+        STARTING: :starting
+        RUNNING: :running
+        STOPPING: :stopping
+        SLEEPING: :sleeping
+        DESTROYING: :destroying
+        DESTROYED: :destroyed
+        FAILED: :failed
+
+        def self?.values: -> ::Array[Dedalus::Models::LifecycleStatus::phase]
+      end
+    end
+  end
+end

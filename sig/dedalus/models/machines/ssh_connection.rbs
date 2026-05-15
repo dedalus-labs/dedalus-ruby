@@ -1,0 +1,48 @@
+module Dedalus
+  module Models
+    module Machines
+      type ssh_connection =
+        {
+          endpoint: String,
+          port: Integer,
+          ssh_username: String,
+          host_trust: Dedalus::Machines::SSHHostTrust,
+          user_certificate: String
+        }
+
+      class SSHConnection < Dedalus::Internal::Type::BaseModel
+        attr_accessor endpoint: String
+
+        attr_accessor port: Integer
+
+        attr_accessor ssh_username: String
+
+        attr_reader host_trust: Dedalus::Machines::SSHHostTrust?
+
+        def host_trust=: (
+          Dedalus::Machines::SSHHostTrust
+        ) -> Dedalus::Machines::SSHHostTrust
+
+        attr_reader user_certificate: String?
+
+        def user_certificate=: (String) -> String
+
+        def initialize: (
+          endpoint: String,
+          port: Integer,
+          ssh_username: String,
+          ?host_trust: Dedalus::Machines::SSHHostTrust,
+          ?user_certificate: String
+        ) -> void
+
+        def to_hash: -> {
+          endpoint: String,
+          port: Integer,
+          ssh_username: String,
+          host_trust: Dedalus::Machines::SSHHostTrust,
+          user_certificate: String
+        }
+      end
+    end
+  end
+end

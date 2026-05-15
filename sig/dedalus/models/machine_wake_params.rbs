@@ -1,0 +1,23 @@
+module Dedalus
+  module Models
+    type machine_wake_params =
+      { machine_id: String } & Dedalus::Internal::Type::request_parameters
+
+    class MachineWakeParams < Dedalus::Internal::Type::BaseModel
+      extend Dedalus::Internal::Type::RequestParameters::Converter
+      include Dedalus::Internal::Type::RequestParameters
+
+      attr_accessor machine_id: String
+
+      def initialize: (
+        machine_id: String,
+        ?request_options: Dedalus::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        machine_id: String,
+        request_options: Dedalus::RequestOptions
+      }
+    end
+  end
+end

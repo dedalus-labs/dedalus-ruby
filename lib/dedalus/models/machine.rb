@@ -1,0 +1,73 @@
+# frozen_string_literal: true
+
+module Dedalus
+  module Models
+    # @see Dedalus::Resources::Machines#create
+    class Machine < Dedalus::Internal::Type::BaseModel
+      # @!attribute autosleep_seconds
+      #   Seconds of inactivity before autosleep. 0 disables autosleep.
+      #
+      #   @return [Integer]
+      required :autosleep_seconds, Integer
+
+      # @!attribute desired_state
+      #
+      #   @return [Symbol, Dedalus::Models::Machine::DesiredState]
+      required :desired_state, enum: -> { Dedalus::Machine::DesiredState }
+
+      # @!attribute machine_id
+      #
+      #   @return [String]
+      required :machine_id, String
+
+      # @!attribute memory_mib
+      #   Memory in MiB.
+      #
+      #   @return [Integer]
+      required :memory_mib, Integer
+
+      # @!attribute status
+      #
+      #   @return [Dedalus::Models::LifecycleStatus]
+      required :status, -> { Dedalus::LifecycleStatus }
+
+      # @!attribute storage_gib
+      #
+      #   @return [Integer]
+      required :storage_gib, Integer
+
+      # @!attribute vcpu
+      #   CPU in vCPUs.
+      #
+      #   @return [Float]
+      required :vcpu, Float
+
+      # @!method initialize(autosleep_seconds:, desired_state:, machine_id:, memory_mib:, status:, storage_gib:, vcpu:)
+      #   @param autosleep_seconds [Integer] Seconds of inactivity before autosleep. 0 disables autosleep.
+      #
+      #   @param desired_state [Symbol, Dedalus::Models::Machine::DesiredState]
+      #
+      #   @param machine_id [String]
+      #
+      #   @param memory_mib [Integer] Memory in MiB.
+      #
+      #   @param status [Dedalus::Models::LifecycleStatus]
+      #
+      #   @param storage_gib [Integer]
+      #
+      #   @param vcpu [Float] CPU in vCPUs.
+
+      # @see Dedalus::Models::Machine#desired_state
+      module DesiredState
+        extend Dedalus::Internal::Type::Enum
+
+        RUNNING = :running
+        SLEEPING = :sleeping
+        DESTROYED = :destroyed
+
+        # @!method self.values
+        #   @return [Array<Symbol>]
+      end
+    end
+  end
+end

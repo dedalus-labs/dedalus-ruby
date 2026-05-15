@@ -1,0 +1,47 @@
+module Dedalus
+  module Models
+    module Machines
+      type execution_events_params =
+        {
+          machine_id: String,
+          execution_id: String,
+          cursor: String,
+          limit: Integer
+        }
+        & Dedalus::Internal::Type::request_parameters
+
+      class ExecutionEventsParams < Dedalus::Internal::Type::BaseModel
+        extend Dedalus::Internal::Type::RequestParameters::Converter
+        include Dedalus::Internal::Type::RequestParameters
+
+        attr_accessor machine_id: String
+
+        attr_accessor execution_id: String
+
+        attr_reader cursor: String?
+
+        def cursor=: (String) -> String
+
+        attr_reader limit: Integer?
+
+        def limit=: (Integer) -> Integer
+
+        def initialize: (
+          machine_id: String,
+          execution_id: String,
+          ?cursor: String,
+          ?limit: Integer,
+          ?request_options: Dedalus::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          machine_id: String,
+          execution_id: String,
+          cursor: String,
+          limit: Integer,
+          request_options: Dedalus::RequestOptions
+        }
+      end
+    end
+  end
+end

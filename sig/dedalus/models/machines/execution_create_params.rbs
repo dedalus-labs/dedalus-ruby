@@ -1,0 +1,50 @@
+module Dedalus
+  module Models
+    module Machines
+      type execution_create_params =
+        {
+          command: ::Array[String]?,
+          cwd: String,
+          env: ::Hash[Symbol, String],
+          stdin: String,
+          timeout_ms: Integer
+        }
+
+      class ExecutionCreateParams < Dedalus::Internal::Type::BaseModel
+        attr_accessor command: ::Array[String]?
+
+        attr_reader cwd: String?
+
+        def cwd=: (String) -> String
+
+        attr_reader env: ::Hash[Symbol, String]?
+
+        def env=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
+
+        attr_reader stdin: String?
+
+        def stdin=: (String) -> String
+
+        attr_reader timeout_ms: Integer?
+
+        def timeout_ms=: (Integer) -> Integer
+
+        def initialize: (
+          command: ::Array[String]?,
+          ?cwd: String,
+          ?env: ::Hash[Symbol, String],
+          ?stdin: String,
+          ?timeout_ms: Integer
+        ) -> void
+
+        def to_hash: -> {
+          command: ::Array[String]?,
+          cwd: String,
+          env: ::Hash[Symbol, String],
+          stdin: String,
+          timeout_ms: Integer
+        }
+      end
+    end
+  end
+end

@@ -1,0 +1,30 @@
+module Dedalus
+  module Models
+    module Machines
+      type terminal_closed_event =
+        { type: Dedalus::Models::Machines::TerminalClosedEvent::type_ }
+
+      class TerminalClosedEvent < Dedalus::Internal::Type::BaseModel
+        attr_accessor type: Dedalus::Models::Machines::TerminalClosedEvent::type_
+
+        def initialize: (
+          type: Dedalus::Models::Machines::TerminalClosedEvent::type_
+        ) -> void
+
+        def to_hash: -> {
+          type: Dedalus::Models::Machines::TerminalClosedEvent::type_
+        }
+
+        type type_ = :closed
+
+        module Type
+          extend Dedalus::Internal::Type::Enum
+
+          CLOSED: :closed
+
+          def self?.values: -> ::Array[Dedalus::Models::Machines::TerminalClosedEvent::type_]
+        end
+      end
+    end
+  end
+end

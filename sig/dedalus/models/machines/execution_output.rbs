@@ -1,0 +1,64 @@
+module Dedalus
+  module Models
+    module Machines
+      type execution_output =
+        {
+          execution_id: String,
+          stderr: String,
+          stderr_bytes: Integer,
+          stderr_truncated: bool,
+          stdout: String,
+          stdout_bytes: Integer,
+          stdout_truncated: bool
+        }
+
+      class ExecutionOutput < Dedalus::Internal::Type::BaseModel
+        attr_accessor execution_id: String
+
+        attr_reader stderr: String?
+
+        def stderr=: (String) -> String
+
+        attr_reader stderr_bytes: Integer?
+
+        def stderr_bytes=: (Integer) -> Integer
+
+        attr_reader stderr_truncated: bool?
+
+        def stderr_truncated=: (bool) -> bool
+
+        attr_reader stdout: String?
+
+        def stdout=: (String) -> String
+
+        attr_reader stdout_bytes: Integer?
+
+        def stdout_bytes=: (Integer) -> Integer
+
+        attr_reader stdout_truncated: bool?
+
+        def stdout_truncated=: (bool) -> bool
+
+        def initialize: (
+          execution_id: String,
+          ?stderr: String,
+          ?stderr_bytes: Integer,
+          ?stderr_truncated: bool,
+          ?stdout: String,
+          ?stdout_bytes: Integer,
+          ?stdout_truncated: bool
+        ) -> void
+
+        def to_hash: -> {
+          execution_id: String,
+          stderr: String,
+          stderr_bytes: Integer,
+          stderr_truncated: bool,
+          stdout: String,
+          stdout_bytes: Integer,
+          stdout_truncated: bool
+        }
+      end
+    end
+  end
+end

@@ -1,0 +1,166 @@
+module Dedalus
+  module Models
+    module Machines
+      type execution =
+        {
+          command: ::Array[String]?,
+          created_at: Time,
+          execution_id: String,
+          machine_id: String,
+          status: Dedalus::Models::Machines::Execution::status,
+          artifacts: ::Array[Dedalus::Machines::ArtifactRef]?,
+          completed_at: Time,
+          cwd: String,
+          env_keys: ::Array[String]?,
+          error_code: String,
+          error_message: String,
+          exit_code: Integer,
+          expires_at: Time,
+          retry_after_ms: Integer,
+          signal: Integer,
+          started_at: Time,
+          stderr_bytes: Integer,
+          stderr_truncated: bool,
+          stdout_bytes: Integer,
+          stdout_truncated: bool
+        }
+
+      class Execution < Dedalus::Internal::Type::BaseModel
+        attr_accessor command: ::Array[String]?
+
+        attr_accessor created_at: Time
+
+        attr_accessor execution_id: String
+
+        attr_accessor machine_id: String
+
+        attr_accessor status: Dedalus::Models::Machines::Execution::status
+
+        attr_accessor artifacts: ::Array[Dedalus::Machines::ArtifactRef]?
+
+        attr_reader completed_at: Time?
+
+        def completed_at=: (Time) -> Time
+
+        attr_reader cwd: String?
+
+        def cwd=: (String) -> String
+
+        attr_accessor env_keys: ::Array[String]?
+
+        attr_reader error_code: String?
+
+        def error_code=: (String) -> String
+
+        attr_reader error_message: String?
+
+        def error_message=: (String) -> String
+
+        attr_reader exit_code: Integer?
+
+        def exit_code=: (Integer) -> Integer
+
+        attr_reader expires_at: Time?
+
+        def expires_at=: (Time) -> Time
+
+        attr_reader retry_after_ms: Integer?
+
+        def retry_after_ms=: (Integer) -> Integer
+
+        attr_reader signal: Integer?
+
+        def signal=: (Integer) -> Integer
+
+        attr_reader started_at: Time?
+
+        def started_at=: (Time) -> Time
+
+        attr_reader stderr_bytes: Integer?
+
+        def stderr_bytes=: (Integer) -> Integer
+
+        attr_reader stderr_truncated: bool?
+
+        def stderr_truncated=: (bool) -> bool
+
+        attr_reader stdout_bytes: Integer?
+
+        def stdout_bytes=: (Integer) -> Integer
+
+        attr_reader stdout_truncated: bool?
+
+        def stdout_truncated=: (bool) -> bool
+
+        def initialize: (
+          command: ::Array[String]?,
+          created_at: Time,
+          execution_id: String,
+          machine_id: String,
+          status: Dedalus::Models::Machines::Execution::status,
+          ?artifacts: ::Array[Dedalus::Machines::ArtifactRef]?,
+          ?completed_at: Time,
+          ?cwd: String,
+          ?env_keys: ::Array[String]?,
+          ?error_code: String,
+          ?error_message: String,
+          ?exit_code: Integer,
+          ?expires_at: Time,
+          ?retry_after_ms: Integer,
+          ?signal: Integer,
+          ?started_at: Time,
+          ?stderr_bytes: Integer,
+          ?stderr_truncated: bool,
+          ?stdout_bytes: Integer,
+          ?stdout_truncated: bool
+        ) -> void
+
+        def to_hash: -> {
+          command: ::Array[String]?,
+          created_at: Time,
+          execution_id: String,
+          machine_id: String,
+          status: Dedalus::Models::Machines::Execution::status,
+          artifacts: ::Array[Dedalus::Machines::ArtifactRef]?,
+          completed_at: Time,
+          cwd: String,
+          env_keys: ::Array[String]?,
+          error_code: String,
+          error_message: String,
+          exit_code: Integer,
+          expires_at: Time,
+          retry_after_ms: Integer,
+          signal: Integer,
+          started_at: Time,
+          stderr_bytes: Integer,
+          stderr_truncated: bool,
+          stdout_bytes: Integer,
+          stdout_truncated: bool
+        }
+
+        type status =
+          :wake_in_progress
+          | :queued
+          | :running
+          | :succeeded
+          | :failed
+          | :cancelled
+          | :expired
+
+        module Status
+          extend Dedalus::Internal::Type::Enum
+
+          WAKE_IN_PROGRESS: :wake_in_progress
+          QUEUED: :queued
+          RUNNING: :running
+          SUCCEEDED: :succeeded
+          FAILED: :failed
+          CANCELLED: :cancelled
+          EXPIRED: :expired
+
+          def self?.values: -> ::Array[Dedalus::Models::Machines::Execution::status]
+        end
+      end
+    end
+  end
+end

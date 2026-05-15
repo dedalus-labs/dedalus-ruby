@@ -1,0 +1,52 @@
+module Dedalus
+  module Resources
+    class Machines
+      class Executions
+        def create: (
+          machine_id: String,
+          command: ::Array[String]?,
+          ?cwd: String,
+          ?env: ::Hash[Symbol, String],
+          ?stdin: String,
+          ?timeout_ms: Integer,
+          ?request_options: Dedalus::request_opts
+        ) -> Dedalus::Machines::Execution
+
+        def retrieve: (
+          machine_id: String,
+          execution_id: String,
+          ?request_options: Dedalus::request_opts
+        ) -> Dedalus::Machines::Execution
+
+        def list: (
+          machine_id: String,
+          ?cursor: String,
+          ?limit: Integer,
+          ?request_options: Dedalus::request_opts
+        ) -> Dedalus::Internal::CursorPage[Dedalus::Machines::Execution]
+
+        def delete: (
+          machine_id: String,
+          execution_id: String,
+          ?request_options: Dedalus::request_opts
+        ) -> Dedalus::Machines::Execution
+
+        def events: (
+          machine_id: String,
+          execution_id: String,
+          ?cursor: String,
+          ?limit: Integer,
+          ?request_options: Dedalus::request_opts
+        ) -> Dedalus::Internal::CursorPage[Dedalus::Machines::ExecutionEvent]
+
+        def output: (
+          machine_id: String,
+          execution_id: String,
+          ?request_options: Dedalus::request_opts
+        ) -> Dedalus::Machines::ExecutionOutput
+
+        def initialize: (client: Dedalus::Client) -> void
+      end
+    end
+  end
+end

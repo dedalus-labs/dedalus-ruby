@@ -1,0 +1,66 @@
+module Dedalus
+  module Resources
+    class Machines
+      attr_reader artifacts: Dedalus::Resources::Machines::Artifacts
+
+      attr_reader previews: Dedalus::Resources::Machines::Previews
+
+      attr_reader ssh: Dedalus::Resources::Machines::SSH
+
+      attr_reader executions: Dedalus::Resources::Machines::Executions
+
+      attr_reader terminals: Dedalus::Resources::Machines::Terminals
+
+      def create: (
+        memory_mib: Integer,
+        storage_gib: Integer,
+        vcpu: Float,
+        ?autosleep: String,
+        ?request_options: Dedalus::request_opts
+      ) -> Dedalus::Machine
+
+      def retrieve: (
+        machine_id: String,
+        ?request_options: Dedalus::request_opts
+      ) -> Dedalus::Machine
+
+      def update: (
+        machine_id: String,
+        ?autosleep: String,
+        ?memory_mib: Integer,
+        ?storage_gib: Integer,
+        ?vcpu: Float,
+        ?request_options: Dedalus::request_opts
+      ) -> Dedalus::Machine
+
+      def list: (
+        ?cursor: String,
+        ?limit: Integer,
+        ?request_options: Dedalus::request_opts
+      ) -> Dedalus::Internal::CursorPage[Dedalus::MachineListItem]
+
+      def delete: (
+        machine_id: String,
+        ?request_options: Dedalus::request_opts
+      ) -> Dedalus::Machine
+
+      def sleep_: (
+        machine_id: String,
+        ?request_options: Dedalus::request_opts
+      ) -> Dedalus::Machine
+
+      def wake: (
+        machine_id: String,
+        ?request_options: Dedalus::request_opts
+      ) -> Dedalus::Machine
+
+      def watch_streaming: (
+        machine_id: String,
+        ?last_event_id: String,
+        ?request_options: Dedalus::request_opts
+      ) -> Dedalus::Internal::Stream[Dedalus::Machine]
+
+      def initialize: (client: Dedalus::Client) -> void
+    end
+  end
+end

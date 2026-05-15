@@ -1,0 +1,57 @@
+module Dedalus
+  module Models
+    type machine_storage_usage_row =
+      {
+        bucket_end: Time,
+        bucket_start: Time,
+        logical_storage_bytes: Integer,
+        machine_id: String,
+        org_metering_bucket_id: String,
+        storage_mib_seconds: Integer,
+        stripe_storage_identifier: String,
+        latest_stripe_emitted_at: Time
+      }
+
+    class MachineStorageUsageRow < Dedalus::Internal::Type::BaseModel
+      attr_accessor bucket_end: Time
+
+      attr_accessor bucket_start: Time
+
+      attr_accessor logical_storage_bytes: Integer
+
+      attr_accessor machine_id: String
+
+      attr_accessor org_metering_bucket_id: String
+
+      attr_accessor storage_mib_seconds: Integer
+
+      attr_accessor stripe_storage_identifier: String
+
+      attr_reader latest_stripe_emitted_at: Time?
+
+      def latest_stripe_emitted_at=: (Time) -> Time
+
+      def initialize: (
+        bucket_end: Time,
+        bucket_start: Time,
+        logical_storage_bytes: Integer,
+        machine_id: String,
+        org_metering_bucket_id: String,
+        storage_mib_seconds: Integer,
+        stripe_storage_identifier: String,
+        ?latest_stripe_emitted_at: Time
+      ) -> void
+
+      def to_hash: -> {
+        bucket_end: Time,
+        bucket_start: Time,
+        logical_storage_bytes: Integer,
+        machine_id: String,
+        org_metering_bucket_id: String,
+        storage_mib_seconds: Integer,
+        stripe_storage_identifier: String,
+        latest_stripe_emitted_at: Time
+      }
+    end
+  end
+end

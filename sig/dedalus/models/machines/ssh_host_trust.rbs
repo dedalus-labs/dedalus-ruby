@@ -1,0 +1,42 @@
+module Dedalus
+  module Models
+    module Machines
+      type ssh_host_trust =
+        {
+          host_pattern: String,
+          kind: Dedalus::Models::Machines::SSHHostTrust::kind,
+          public_key: String
+        }
+
+      class SSHHostTrust < Dedalus::Internal::Type::BaseModel
+        attr_accessor host_pattern: String
+
+        attr_accessor kind: Dedalus::Models::Machines::SSHHostTrust::kind
+
+        attr_accessor public_key: String
+
+        def initialize: (
+          host_pattern: String,
+          kind: Dedalus::Models::Machines::SSHHostTrust::kind,
+          public_key: String
+        ) -> void
+
+        def to_hash: -> {
+          host_pattern: String,
+          kind: Dedalus::Models::Machines::SSHHostTrust::kind,
+          public_key: String
+        }
+
+        type kind = :cert_authority
+
+        module Kind
+          extend Dedalus::Internal::Type::Enum
+
+          CERT_AUTHORITY: :cert_authority
+
+          def self?.values: -> ::Array[Dedalus::Models::Machines::SSHHostTrust::kind]
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,49 @@
+module Dedalus
+  module Models
+    type usage_machine_compute_params =
+      {
+        granularity: String,
+        machine_id: String,
+        period_end: String,
+        period_start: String
+      }
+      & Dedalus::Internal::Type::request_parameters
+
+    class UsageMachineComputeParams < Dedalus::Internal::Type::BaseModel
+      extend Dedalus::Internal::Type::RequestParameters::Converter
+      include Dedalus::Internal::Type::RequestParameters
+
+      attr_reader granularity: String?
+
+      def granularity=: (String) -> String
+
+      attr_reader machine_id: String?
+
+      def machine_id=: (String) -> String
+
+      attr_reader period_end: String?
+
+      def period_end=: (String) -> String
+
+      attr_reader period_start: String?
+
+      def period_start=: (String) -> String
+
+      def initialize: (
+        ?granularity: String,
+        ?machine_id: String,
+        ?period_end: String,
+        ?period_start: String,
+        ?request_options: Dedalus::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        granularity: String,
+        machine_id: String,
+        period_end: String,
+        period_start: String,
+        request_options: Dedalus::RequestOptions
+      }
+    end
+  end
+end
