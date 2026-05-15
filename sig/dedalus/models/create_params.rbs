@@ -1,0 +1,37 @@
+module Dedalus
+  module Models
+    type create_params =
+      {
+        memory_mib: Integer,
+        storage_gib: Integer,
+        vcpu: Float,
+        autosleep: String
+      }
+
+    class CreateParams < Dedalus::Internal::Type::BaseModel
+      attr_accessor memory_mib: Integer
+
+      attr_accessor storage_gib: Integer
+
+      attr_accessor vcpu: Float
+
+      attr_reader autosleep: String?
+
+      def autosleep=: (String) -> String
+
+      def initialize: (
+        memory_mib: Integer,
+        storage_gib: Integer,
+        vcpu: Float,
+        ?autosleep: String
+      ) -> void
+
+      def to_hash: -> {
+        memory_mib: Integer,
+        storage_gib: Integer,
+        vcpu: Float,
+        autosleep: String
+      }
+    end
+  end
+end

@@ -1,0 +1,27 @@
+module Dedalus
+  module Models
+    module Machines
+      type ssh_create_params =
+        { machine_id: String } & Dedalus::Internal::Type::request_parameters
+
+      class SSHCreateParams < Dedalus::Models::Machines::SSHSessionCreateParams
+        extend Dedalus::Internal::Type::RequestParameters::Converter
+        include Dedalus::Internal::Type::RequestParameters
+
+        def machine_id: -> String
+
+        def machine_id=: (String _) -> String
+
+        def initialize: (
+          machine_id: String,
+          ?request_options: Dedalus::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          machine_id: String,
+          request_options: Dedalus::RequestOptions
+        }
+      end
+    end
+  end
+end

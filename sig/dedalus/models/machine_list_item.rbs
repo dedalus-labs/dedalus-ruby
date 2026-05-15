@@ -1,0 +1,67 @@
+module Dedalus
+  module Models
+    type machine_list_item =
+      {
+        autosleep_seconds: Integer,
+        created_at: Time,
+        desired_state: Dedalus::Models::MachineListItem::desired_state,
+        machine_id: String,
+        memory_mib: Integer,
+        status: Dedalus::LifecycleStatus,
+        storage_gib: Integer,
+        vcpu: Float
+      }
+
+    class MachineListItem < Dedalus::Internal::Type::BaseModel
+      attr_accessor autosleep_seconds: Integer
+
+      attr_accessor created_at: Time
+
+      attr_accessor desired_state: Dedalus::Models::MachineListItem::desired_state
+
+      attr_accessor machine_id: String
+
+      attr_accessor memory_mib: Integer
+
+      attr_accessor status: Dedalus::LifecycleStatus
+
+      attr_accessor storage_gib: Integer
+
+      attr_accessor vcpu: Float
+
+      def initialize: (
+        autosleep_seconds: Integer,
+        created_at: Time,
+        desired_state: Dedalus::Models::MachineListItem::desired_state,
+        machine_id: String,
+        memory_mib: Integer,
+        status: Dedalus::LifecycleStatus,
+        storage_gib: Integer,
+        vcpu: Float
+      ) -> void
+
+      def to_hash: -> {
+        autosleep_seconds: Integer,
+        created_at: Time,
+        desired_state: Dedalus::Models::MachineListItem::desired_state,
+        machine_id: String,
+        memory_mib: Integer,
+        status: Dedalus::LifecycleStatus,
+        storage_gib: Integer,
+        vcpu: Float
+      }
+
+      type desired_state = :running | :sleeping | :destroyed
+
+      module DesiredState
+        extend Dedalus::Internal::Type::Enum
+
+        RUNNING: :running
+        SLEEPING: :sleeping
+        DESTROYED: :destroyed
+
+        def self?.values: -> ::Array[Dedalus::Models::MachineListItem::desired_state]
+      end
+    end
+  end
+end

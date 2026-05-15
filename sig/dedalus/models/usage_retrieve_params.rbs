@@ -1,0 +1,25 @@
+module Dedalus
+  module Models
+    type usage_retrieve_params =
+      { period_start: String } & Dedalus::Internal::Type::request_parameters
+
+    class UsageRetrieveParams < Dedalus::Internal::Type::BaseModel
+      extend Dedalus::Internal::Type::RequestParameters::Converter
+      include Dedalus::Internal::Type::RequestParameters
+
+      attr_reader period_start: String?
+
+      def period_start=: (String) -> String
+
+      def initialize: (
+        ?period_start: String,
+        ?request_options: Dedalus::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        period_start: String,
+        request_options: Dedalus::RequestOptions
+      }
+    end
+  end
+end

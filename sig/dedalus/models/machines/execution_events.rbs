@@ -1,0 +1,29 @@
+module Dedalus
+  module Models
+    module Machines
+      type execution_events =
+        {
+          items: ::Array[Dedalus::Machines::ExecutionEvent]?,
+          next_cursor: String
+        }
+
+      class ExecutionEvents < Dedalus::Internal::Type::BaseModel
+        attr_accessor items: ::Array[Dedalus::Machines::ExecutionEvent]?
+
+        attr_reader next_cursor: String?
+
+        def next_cursor=: (String) -> String
+
+        def initialize: (
+          items: ::Array[Dedalus::Machines::ExecutionEvent]?,
+          ?next_cursor: String
+        ) -> void
+
+        def to_hash: -> {
+          items: ::Array[Dedalus::Machines::ExecutionEvent]?,
+          next_cursor: String
+        }
+      end
+    end
+  end
+end

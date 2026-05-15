@@ -1,0 +1,24 @@
+module Dedalus
+  module Models
+    type machine_list =
+      { items: ::Array[Dedalus::MachineListItem]?, next_cursor: String }
+
+    class MachineList < Dedalus::Internal::Type::BaseModel
+      attr_accessor items: ::Array[Dedalus::MachineListItem]?
+
+      attr_reader next_cursor: String?
+
+      def next_cursor=: (String) -> String
+
+      def initialize: (
+        items: ::Array[Dedalus::MachineListItem]?,
+        ?next_cursor: String
+      ) -> void
+
+      def to_hash: -> {
+        items: ::Array[Dedalus::MachineListItem]?,
+        next_cursor: String
+      }
+    end
+  end
+end

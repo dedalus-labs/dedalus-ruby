@@ -1,0 +1,15 @@
+module Dedalus
+  module Models
+    module Machines
+      type ssh_session_create_params = { public_key: String }
+
+      class SSHSessionCreateParams < Dedalus::Internal::Type::BaseModel
+        attr_accessor public_key: String
+
+        def initialize: (public_key: String) -> void
+
+        def to_hash: -> { public_key: String }
+      end
+    end
+  end
+end

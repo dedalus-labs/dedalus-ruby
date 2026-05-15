@@ -1,0 +1,36 @@
+module Dedalus
+  module Resources
+    class Machines
+      class Previews
+        def create: (
+          machine_id: String,
+          port: Integer,
+          ?protocol: Dedalus::Models::Machines::PreviewCreateParams::protocol,
+          ?visibility: Dedalus::Models::Machines::PreviewCreateParams::visibility,
+          ?request_options: Dedalus::request_opts
+        ) -> Dedalus::Machines::Preview
+
+        def retrieve: (
+          machine_id: String,
+          preview_id: String,
+          ?request_options: Dedalus::request_opts
+        ) -> Dedalus::Machines::Preview
+
+        def list: (
+          machine_id: String,
+          ?cursor: String,
+          ?limit: Integer,
+          ?request_options: Dedalus::request_opts
+        ) -> Dedalus::Internal::CursorPage[Dedalus::Machines::Preview]
+
+        def delete: (
+          machine_id: String,
+          preview_id: String,
+          ?request_options: Dedalus::request_opts
+        ) -> Dedalus::Machines::Preview
+
+        def initialize: (client: Dedalus::Client) -> void
+      end
+    end
+  end
+end

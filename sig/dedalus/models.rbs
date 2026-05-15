@@ -1,0 +1,47 @@
+module Dedalus
+  class CreateParams = Dedalus::Models::CreateParams
+
+  class LifecycleStatus = Dedalus::Models::LifecycleStatus
+
+  class Machine = Dedalus::Models::Machine
+
+  class MachineComputeUsage = Dedalus::Models::MachineComputeUsage
+
+  class MachineComputeUsageRow = Dedalus::Models::MachineComputeUsageRow
+
+  class MachineCreateParams = Dedalus::Models::MachineCreateParams
+
+  class MachineDeleteParams = Dedalus::Models::MachineDeleteParams
+
+  class MachineList = Dedalus::Models::MachineList
+
+  class MachineListItem = Dedalus::Models::MachineListItem
+
+  class MachineListParams = Dedalus::Models::MachineListParams
+
+  class MachineRetrieveParams = Dedalus::Models::MachineRetrieveParams
+
+  module Machines = Dedalus::Models::Machines
+
+  class MachineSleepParams = Dedalus::Models::MachineSleepParams
+
+  class MachineStorageUsage = Dedalus::Models::MachineStorageUsage
+
+  class MachineStorageUsageRow = Dedalus::Models::MachineStorageUsageRow
+
+  class MachineUpdateParams = Dedalus::Models::MachineUpdateParams
+
+  class MachineWakeParams = Dedalus::Models::MachineWakeParams
+
+  class MachineWatchParams = Dedalus::Models::MachineWatchParams
+
+  class OrgUsage = Dedalus::Models::OrgUsage
+
+  class UpdateParams = Dedalus::Models::UpdateParams
+
+  class UsageMachineComputeParams = Dedalus::Models::UsageMachineComputeParams
+
+  class UsageMachineStorageParams = Dedalus::Models::UsageMachineStorageParams
+
+  class UsageRetrieveParams = Dedalus::Models::UsageRetrieveParams
+end

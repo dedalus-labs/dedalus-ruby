@@ -1,0 +1,15 @@
+module Dedalus
+  module Models
+    module Machines
+      type terminal_client_event =
+        Dedalus::Machines::TerminalInputEvent
+        | Dedalus::Machines::TerminalResizeEvent
+
+      module TerminalClientEvent
+        extend Dedalus::Internal::Type::Union
+
+        def self?.variants: -> ::Array[Dedalus::Models::Machines::terminal_client_event]
+      end
+    end
+  end
+end

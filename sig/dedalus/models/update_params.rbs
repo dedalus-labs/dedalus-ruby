@@ -1,0 +1,43 @@
+module Dedalus
+  module Models
+    type update_params =
+      {
+        autosleep: String,
+        memory_mib: Integer,
+        storage_gib: Integer,
+        vcpu: Float
+      }
+
+    class UpdateParams < Dedalus::Internal::Type::BaseModel
+      attr_reader autosleep: String?
+
+      def autosleep=: (String) -> String
+
+      attr_reader memory_mib: Integer?
+
+      def memory_mib=: (Integer) -> Integer
+
+      attr_reader storage_gib: Integer?
+
+      def storage_gib=: (Integer) -> Integer
+
+      attr_reader vcpu: Float?
+
+      def vcpu=: (Float) -> Float
+
+      def initialize: (
+        ?autosleep: String,
+        ?memory_mib: Integer,
+        ?storage_gib: Integer,
+        ?vcpu: Float
+      ) -> void
+
+      def to_hash: -> {
+        autosleep: String,
+        memory_mib: Integer,
+        storage_gib: Integer,
+        vcpu: Float
+      }
+    end
+  end
+end

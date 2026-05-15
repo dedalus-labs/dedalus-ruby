@@ -1,0 +1,17 @@
+module Dedalus
+  module Models
+    module Machines
+      type artifact_ref = { artifact_id: String, name: String }
+
+      class ArtifactRef < Dedalus::Internal::Type::BaseModel
+        attr_accessor artifact_id: String
+
+        attr_accessor name: String
+
+        def initialize: (artifact_id: String, name: String) -> void
+
+        def to_hash: -> { artifact_id: String, name: String }
+      end
+    end
+  end
+end

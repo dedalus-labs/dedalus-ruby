@@ -1,0 +1,95 @@
+module Dedalus
+  module Models
+    module Machines
+      type ssh_session =
+        {
+          created_at: Time,
+          machine_id: String,
+          session_id: String,
+          status: Dedalus::Models::Machines::SSHSession::status,
+          connection: Dedalus::Machines::SSHConnection,
+          error_code: String,
+          error_message: String,
+          expires_at: Time,
+          ready_at: Time,
+          retry_after_ms: Integer
+        }
+
+      class SSHSession < Dedalus::Internal::Type::BaseModel
+        attr_accessor created_at: Time
+
+        attr_accessor machine_id: String
+
+        attr_accessor session_id: String
+
+        attr_accessor status: Dedalus::Models::Machines::SSHSession::status
+
+        attr_reader connection: Dedalus::Machines::SSHConnection?
+
+        def connection=: (
+          Dedalus::Machines::SSHConnection
+        ) -> Dedalus::Machines::SSHConnection
+
+        attr_reader error_code: String?
+
+        def error_code=: (String) -> String
+
+        attr_reader error_message: String?
+
+        def error_message=: (String) -> String
+
+        attr_reader expires_at: Time?
+
+        def expires_at=: (Time) -> Time
+
+        attr_reader ready_at: Time?
+
+        def ready_at=: (Time) -> Time
+
+        attr_reader retry_after_ms: Integer?
+
+        def retry_after_ms=: (Integer) -> Integer
+
+        def initialize: (
+          created_at: Time,
+          machine_id: String,
+          session_id: String,
+          status: Dedalus::Models::Machines::SSHSession::status,
+          ?connection: Dedalus::Machines::SSHConnection,
+          ?error_code: String,
+          ?error_message: String,
+          ?expires_at: Time,
+          ?ready_at: Time,
+          ?retry_after_ms: Integer
+        ) -> void
+
+        def to_hash: -> {
+          created_at: Time,
+          machine_id: String,
+          session_id: String,
+          status: Dedalus::Models::Machines::SSHSession::status,
+          connection: Dedalus::Machines::SSHConnection,
+          error_code: String,
+          error_message: String,
+          expires_at: Time,
+          ready_at: Time,
+          retry_after_ms: Integer
+        }
+
+        type status = :wake_in_progress | :ready | :closed | :expired | :failed
+
+        module Status
+          extend Dedalus::Internal::Type::Enum
+
+          WAKE_IN_PROGRESS: :wake_in_progress
+          READY: :ready
+          CLOSED: :closed
+          EXPIRED: :expired
+          FAILED: :failed
+
+          def self?.values: -> ::Array[Dedalus::Models::Machines::SSHSession::status]
+        end
+      end
+    end
+  end
+end

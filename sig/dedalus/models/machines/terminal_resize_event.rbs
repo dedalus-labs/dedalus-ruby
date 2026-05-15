@@ -1,0 +1,42 @@
+module Dedalus
+  module Models
+    module Machines
+      type terminal_resize_event =
+        {
+          height: Integer,
+          type: Dedalus::Models::Machines::TerminalResizeEvent::type_,
+          width: Integer
+        }
+
+      class TerminalResizeEvent < Dedalus::Internal::Type::BaseModel
+        attr_accessor height: Integer
+
+        attr_accessor type: Dedalus::Models::Machines::TerminalResizeEvent::type_
+
+        attr_accessor width: Integer
+
+        def initialize: (
+          height: Integer,
+          type: Dedalus::Models::Machines::TerminalResizeEvent::type_,
+          width: Integer
+        ) -> void
+
+        def to_hash: -> {
+          height: Integer,
+          type: Dedalus::Models::Machines::TerminalResizeEvent::type_,
+          width: Integer
+        }
+
+        type type_ = :resize
+
+        module Type
+          extend Dedalus::Internal::Type::Enum
+
+          RESIZE: :resize
+
+          def self?.values: -> ::Array[Dedalus::Models::Machines::TerminalResizeEvent::type_]
+        end
+      end
+    end
+  end
+end

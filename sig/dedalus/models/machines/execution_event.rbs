@@ -1,0 +1,111 @@
+module Dedalus
+  module Models
+    module Machines
+      type execution_event =
+        {
+          at: Time,
+          sequence: Integer,
+          type: Dedalus::Models::Machines::ExecutionEvent::type_,
+          chunk: String,
+          error_code: String,
+          error_message: String,
+          exit_code: Integer,
+          signal: Integer,
+          status: Dedalus::Models::Machines::ExecutionEvent::status
+        }
+
+      class ExecutionEvent < Dedalus::Internal::Type::BaseModel
+        attr_accessor at: Time
+
+        attr_accessor sequence: Integer
+
+        attr_accessor type: Dedalus::Models::Machines::ExecutionEvent::type_
+
+        attr_reader chunk: String?
+
+        def chunk=: (String) -> String
+
+        attr_reader error_code: String?
+
+        def error_code=: (String) -> String
+
+        attr_reader error_message: String?
+
+        def error_message=: (String) -> String
+
+        attr_reader exit_code: Integer?
+
+        def exit_code=: (Integer) -> Integer
+
+        attr_reader signal: Integer?
+
+        def signal=: (Integer) -> Integer
+
+        attr_reader status: Dedalus::Models::Machines::ExecutionEvent::status?
+
+        def status=: (
+          Dedalus::Models::Machines::ExecutionEvent::status
+        ) -> Dedalus::Models::Machines::ExecutionEvent::status
+
+        def initialize: (
+          at: Time,
+          sequence: Integer,
+          type: Dedalus::Models::Machines::ExecutionEvent::type_,
+          ?chunk: String,
+          ?error_code: String,
+          ?error_message: String,
+          ?exit_code: Integer,
+          ?signal: Integer,
+          ?status: Dedalus::Models::Machines::ExecutionEvent::status
+        ) -> void
+
+        def to_hash: -> {
+          at: Time,
+          sequence: Integer,
+          type: Dedalus::Models::Machines::ExecutionEvent::type_,
+          chunk: String,
+          error_code: String,
+          error_message: String,
+          exit_code: Integer,
+          signal: Integer,
+          status: Dedalus::Models::Machines::ExecutionEvent::status
+        }
+
+        type type_ = :lifecycle | :stdout | :stderr
+
+        module Type
+          extend Dedalus::Internal::Type::Enum
+
+          LIFECYCLE: :lifecycle
+          STDOUT: :stdout
+          STDERR: :stderr
+
+          def self?.values: -> ::Array[Dedalus::Models::Machines::ExecutionEvent::type_]
+        end
+
+        type status =
+          :wake_in_progress
+          | :queued
+          | :running
+          | :succeeded
+          | :failed
+          | :cancelled
+          | :expired
+
+        module Status
+          extend Dedalus::Internal::Type::Enum
+
+          WAKE_IN_PROGRESS: :wake_in_progress
+          QUEUED: :queued
+          RUNNING: :running
+          SUCCEEDED: :succeeded
+          FAILED: :failed
+          CANCELLED: :cancelled
+          EXPIRED: :expired
+
+          def self?.values: -> ::Array[Dedalus::Models::Machines::ExecutionEvent::status]
+        end
+      end
+    end
+  end
+end

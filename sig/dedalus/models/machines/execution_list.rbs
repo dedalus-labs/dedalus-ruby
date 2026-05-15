@@ -1,0 +1,26 @@
+module Dedalus
+  module Models
+    module Machines
+      type execution_list =
+        { items: ::Array[Dedalus::Machines::Execution]?, next_cursor: String }
+
+      class ExecutionList < Dedalus::Internal::Type::BaseModel
+        attr_accessor items: ::Array[Dedalus::Machines::Execution]?
+
+        attr_reader next_cursor: String?
+
+        def next_cursor=: (String) -> String
+
+        def initialize: (
+          items: ::Array[Dedalus::Machines::Execution]?,
+          ?next_cursor: String
+        ) -> void
+
+        def to_hash: -> {
+          items: ::Array[Dedalus::Machines::Execution]?,
+          next_cursor: String
+        }
+      end
+    end
+  end
+end

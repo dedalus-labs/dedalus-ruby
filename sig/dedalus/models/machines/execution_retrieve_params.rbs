@@ -1,0 +1,30 @@
+module Dedalus
+  module Models
+    module Machines
+      type execution_retrieve_params =
+        { machine_id: String, execution_id: String }
+        & Dedalus::Internal::Type::request_parameters
+
+      class ExecutionRetrieveParams < Dedalus::Internal::Type::BaseModel
+        extend Dedalus::Internal::Type::RequestParameters::Converter
+        include Dedalus::Internal::Type::RequestParameters
+
+        attr_accessor machine_id: String
+
+        attr_accessor execution_id: String
+
+        def initialize: (
+          machine_id: String,
+          execution_id: String,
+          ?request_options: Dedalus::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          machine_id: String,
+          execution_id: String,
+          request_options: Dedalus::RequestOptions
+        }
+      end
+    end
+  end
+end

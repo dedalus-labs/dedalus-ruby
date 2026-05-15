@@ -1,0 +1,34 @@
+module Dedalus
+  module Resources
+    class Machines
+      class SSH
+        def create: (
+          machine_id: String,
+          public_key: String,
+          ?request_options: Dedalus::request_opts
+        ) -> Dedalus::Machines::SSHSession
+
+        def retrieve: (
+          machine_id: String,
+          session_id: String,
+          ?request_options: Dedalus::request_opts
+        ) -> Dedalus::Machines::SSHSession
+
+        def list: (
+          machine_id: String,
+          ?cursor: String,
+          ?limit: Integer,
+          ?request_options: Dedalus::request_opts
+        ) -> Dedalus::Internal::CursorPage[Dedalus::Machines::SSHSession]
+
+        def delete: (
+          machine_id: String,
+          session_id: String,
+          ?request_options: Dedalus::request_opts
+        ) -> Dedalus::Machines::SSHSession
+
+        def initialize: (client: Dedalus::Client) -> void
+      end
+    end
+  end
+end
