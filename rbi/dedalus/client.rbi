@@ -22,9 +22,6 @@ module Dedalus
     sig { returns(T.nilable(String)) }
     attr_reader :dedalus_org_id
 
-    sig { returns(Dedalus::Resources::Usage) }
-    attr_reader :usage
-
     sig { returns(Dedalus::Resources::Machines) }
     attr_reader :machines
 

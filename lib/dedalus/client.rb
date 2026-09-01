@@ -27,9 +27,6 @@ module Dedalus
     # @return [String, nil]
     attr_reader :dedalus_org_id
 
-    # @return [Dedalus::Resources::Usage]
-    attr_reader :usage
-
     # @return [Dedalus::Resources::Machines]
     attr_reader :machines
 
@@ -118,7 +115,6 @@ module Dedalus
         idempotency_header: idempotency_header
       )
 
-      @usage = Dedalus::Resources::Usage.new(client: self)
       @machines = Dedalus::Resources::Machines.new(client: self)
     end
   end

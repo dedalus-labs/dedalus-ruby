@@ -7,10 +7,6 @@ module Dedalus
 
   Machine = Dedalus::Models::Machine
 
-  MachineComputeUsage = Dedalus::Models::MachineComputeUsage
-
-  MachineComputeUsageRow = Dedalus::Models::MachineComputeUsageRow
-
   MachineCreateParams = Dedalus::Models::MachineCreateParams
 
   MachineDeleteParams = Dedalus::Models::MachineDeleteParams
@@ -27,23 +23,9 @@ module Dedalus
 
   MachineSleepParams = Dedalus::Models::MachineSleepParams
 
-  MachineStorageUsage = Dedalus::Models::MachineStorageUsage
-
-  MachineStorageUsageRow = Dedalus::Models::MachineStorageUsageRow
-
   MachineUpdateParams = Dedalus::Models::MachineUpdateParams
 
   MachineWakeParams = Dedalus::Models::MachineWakeParams
 
-  MachineWatchParams = Dedalus::Models::MachineWatchParams
-
-  OrgUsage = Dedalus::Models::OrgUsage
-
   UpdateParams = Dedalus::Models::UpdateParams
-
-  UsageMachineComputeParams = Dedalus::Models::UsageMachineComputeParams
-
-  UsageMachineStorageParams = Dedalus::Models::UsageMachineStorageParams
-
-  UsageRetrieveParams = Dedalus::Models::UsageRetrieveParams
 end

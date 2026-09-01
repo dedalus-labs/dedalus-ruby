@@ -4,7 +4,11 @@ require_relative "../../test_helper"
 
 class Dedalus::Test::Resources::Machines::ExecutionsTest < Dedalus::Test::ResourceTest
   def test_create_required_params
-    response = @dedalus.machines.executions.create(machine_id: "dm-3", command: ["string"])
+    response =
+      @dedalus.machines.executions.create(
+        machine_id: "dm-ecc2efdd-ddfa-31a9-c6f1-b833d337aa7c",
+        command: ["string"]
+      )
 
     assert_pattern do
       response => Dedalus::Machines::Execution
@@ -37,7 +41,11 @@ class Dedalus::Test::Resources::Machines::ExecutionsTest < Dedalus::Test::Resour
   end
 
   def test_retrieve_required_params
-    response = @dedalus.machines.executions.retrieve(machine_id: "dm-3", execution_id: "execution_id")
+    response =
+      @dedalus.machines.executions.retrieve(
+        machine_id: "dm-ecc2efdd-ddfa-31a9-c6f1-b833d337aa7c",
+        execution_id: "execution_id"
+      )
 
     assert_pattern do
       response => Dedalus::Machines::Execution
@@ -70,7 +78,7 @@ class Dedalus::Test::Resources::Machines::ExecutionsTest < Dedalus::Test::Resour
   end
 
   def test_list_required_params
-    response = @dedalus.machines.executions.list(machine_id: "dm-3")
+    response = @dedalus.machines.executions.list(machine_id: "dm-ecc2efdd-ddfa-31a9-c6f1-b833d337aa7c")
 
     assert_pattern do
       response => Dedalus::Internal::CursorPage
@@ -110,7 +118,11 @@ class Dedalus::Test::Resources::Machines::ExecutionsTest < Dedalus::Test::Resour
   end
 
   def test_delete_required_params
-    response = @dedalus.machines.executions.delete(machine_id: "dm-3", execution_id: "execution_id")
+    response =
+      @dedalus.machines.executions.delete(
+        machine_id: "dm-ecc2efdd-ddfa-31a9-c6f1-b833d337aa7c",
+        execution_id: "execution_id"
+      )
 
     assert_pattern do
       response => Dedalus::Machines::Execution
@@ -143,7 +155,11 @@ class Dedalus::Test::Resources::Machines::ExecutionsTest < Dedalus::Test::Resour
   end
 
   def test_events_required_params
-    response = @dedalus.machines.executions.events(machine_id: "dm-3", execution_id: "execution_id")
+    response =
+      @dedalus.machines.executions.events(
+        machine_id: "dm-ecc2efdd-ddfa-31a9-c6f1-b833d337aa7c",
+        execution_id: "execution_id"
+      )
 
     assert_pattern do
       response => Dedalus::Internal::CursorPage
@@ -172,7 +188,11 @@ class Dedalus::Test::Resources::Machines::ExecutionsTest < Dedalus::Test::Resour
   end
 
   def test_output_required_params
-    response = @dedalus.machines.executions.output(machine_id: "dm-3", execution_id: "execution_id")
+    response =
+      @dedalus.machines.executions.output(
+        machine_id: "dm-ecc2efdd-ddfa-31a9-c6f1-b833d337aa7c",
+        execution_id: "execution_id"
+      )
 
     assert_pattern do
       response => Dedalus::Machines::ExecutionOutput

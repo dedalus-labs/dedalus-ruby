@@ -3,8 +3,8 @@
 require_relative "../test_helper"
 
 class Dedalus::Test::Resources::MachinesTest < Dedalus::Test::ResourceTest
-  def test_create_required_params
-    response = @dedalus.machines.create(memory_mib: 0, storage_gib: 0, vcpu: 0)
+  def test_create
+    response = @dedalus.machines.create
 
     assert_pattern do
       response => Dedalus::Machine
@@ -16,7 +16,7 @@ class Dedalus::Test::Resources::MachinesTest < Dedalus::Test::ResourceTest
         desired_state: Dedalus::Machine::DesiredState,
         machine_id: String,
         memory_mib: Integer,
-        status: Dedalus::LifecycleStatus,
+        phase: Dedalus::Machine::Phase,
         storage_gib: Integer,
         vcpu: Float
       }
@@ -24,16 +24,16 @@ class Dedalus::Test::Resources::MachinesTest < Dedalus::Test::ResourceTest
   end
 
   def test_retrieve_required_params
-    response = @dedalus.machines.retrieve(machine_id: "dm-3")
+    response = @dedalus.machines.retrieve(machine_id: "dm-ecc2efdd-ddfa-31a9-c6f1-b833d337aa7c")
 
     assert_pattern do
-      response => Dedalus::Machine
+      response => Dedalus::Models::MachineRetrieveResponse
     end
 
     assert_pattern do
       response => {
         autosleep_seconds: Integer,
-        desired_state: Dedalus::Machine::DesiredState,
+        desired_state: Dedalus::Models::MachineRetrieveResponse::DesiredState,
         machine_id: String,
         memory_mib: Integer,
         status: Dedalus::LifecycleStatus,
@@ -44,7 +44,7 @@ class Dedalus::Test::Resources::MachinesTest < Dedalus::Test::ResourceTest
   end
 
   def test_update_required_params
-    response = @dedalus.machines.update(machine_id: "dm-3")
+    response = @dedalus.machines.update(machine_id: "dm-ecc2efdd-ddfa-31a9-c6f1-b833d337aa7c")
 
     assert_pattern do
       response => Dedalus::Machine
@@ -56,7 +56,7 @@ class Dedalus::Test::Resources::MachinesTest < Dedalus::Test::ResourceTest
         desired_state: Dedalus::Machine::DesiredState,
         machine_id: String,
         memory_mib: Integer,
-        status: Dedalus::LifecycleStatus,
+        phase: Dedalus::Machine::Phase,
         storage_gib: Integer,
         vcpu: Float
       }
@@ -84,7 +84,7 @@ class Dedalus::Test::Resources::MachinesTest < Dedalus::Test::ResourceTest
         desired_state: Dedalus::MachineListItem::DesiredState,
         machine_id: String,
         memory_mib: Integer,
-        status: Dedalus::LifecycleStatus,
+        phase: Dedalus::MachineListItem::Phase,
         storage_gib: Integer,
         vcpu: Float
       }
@@ -92,7 +92,7 @@ class Dedalus::Test::Resources::MachinesTest < Dedalus::Test::ResourceTest
   end
 
   def test_delete_required_params
-    response = @dedalus.machines.delete(machine_id: "dm-3")
+    response = @dedalus.machines.delete(machine_id: "dm-ecc2efdd-ddfa-31a9-c6f1-b833d337aa7c")
 
     assert_pattern do
       response => Dedalus::Machine
@@ -104,7 +104,7 @@ class Dedalus::Test::Resources::MachinesTest < Dedalus::Test::ResourceTest
         desired_state: Dedalus::Machine::DesiredState,
         machine_id: String,
         memory_mib: Integer,
-        status: Dedalus::LifecycleStatus,
+        phase: Dedalus::Machine::Phase,
         storage_gib: Integer,
         vcpu: Float
       }
@@ -112,7 +112,7 @@ class Dedalus::Test::Resources::MachinesTest < Dedalus::Test::ResourceTest
   end
 
   def test_sleep__required_params
-    response = @dedalus.machines.sleep_(machine_id: "dm-3")
+    response = @dedalus.machines.sleep_(machine_id: "dm-ecc2efdd-ddfa-31a9-c6f1-b833d337aa7c")
 
     assert_pattern do
       response => Dedalus::Machine
@@ -124,7 +124,7 @@ class Dedalus::Test::Resources::MachinesTest < Dedalus::Test::ResourceTest
         desired_state: Dedalus::Machine::DesiredState,
         machine_id: String,
         memory_mib: Integer,
-        status: Dedalus::LifecycleStatus,
+        phase: Dedalus::Machine::Phase,
         storage_gib: Integer,
         vcpu: Float
       }
@@ -132,7 +132,7 @@ class Dedalus::Test::Resources::MachinesTest < Dedalus::Test::ResourceTest
   end
 
   def test_wake_required_params
-    response = @dedalus.machines.wake(machine_id: "dm-3")
+    response = @dedalus.machines.wake(machine_id: "dm-ecc2efdd-ddfa-31a9-c6f1-b833d337aa7c")
 
     assert_pattern do
       response => Dedalus::Machine
@@ -144,7 +144,7 @@ class Dedalus::Test::Resources::MachinesTest < Dedalus::Test::ResourceTest
         desired_state: Dedalus::Machine::DesiredState,
         machine_id: String,
         memory_mib: Integer,
-        status: Dedalus::LifecycleStatus,
+        phase: Dedalus::Machine::Phase,
         storage_gib: Integer,
         vcpu: Float
       }

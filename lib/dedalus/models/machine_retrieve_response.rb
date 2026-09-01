@@ -2,8 +2,8 @@
 
 module Dedalus
   module Models
-    # @see Dedalus::Resources::Machines#create
-    class Machine < Dedalus::Internal::Type::BaseModel
+    # @see Dedalus::Resources::Machines#retrieve
+    class MachineRetrieveResponse < Dedalus::Internal::Type::BaseModel
       # @!attribute autosleep_seconds
       #   Seconds of inactivity before autosleep. 0 disables autosleep.
       #
@@ -12,8 +12,8 @@ module Dedalus
 
       # @!attribute desired_state
       #
-      #   @return [Symbol, Dedalus::Models::Machine::DesiredState]
-      required :desired_state, enum: -> { Dedalus::Machine::DesiredState }
+      #   @return [Symbol, Dedalus::Models::MachineRetrieveResponse::DesiredState]
+      required :desired_state, enum: -> { Dedalus::Models::MachineRetrieveResponse::DesiredState }
 
       # @!attribute machine_id
       #
@@ -26,10 +26,10 @@ module Dedalus
       #   @return [Integer]
       required :memory_mib, Integer
 
-      # @!attribute phase
+      # @!attribute status
       #
-      #   @return [Symbol, Dedalus::Models::Machine::Phase]
-      required :phase, enum: -> { Dedalus::Machine::Phase }
+      #   @return [Dedalus::Models::LifecycleStatus]
+      required :status, -> { Dedalus::LifecycleStatus }
 
       # @!attribute storage_gib
       #
@@ -42,46 +42,28 @@ module Dedalus
       #   @return [Float]
       required :vcpu, Float
 
-      # @!method initialize(autosleep_seconds:, desired_state:, machine_id:, memory_mib:, phase:, storage_gib:, vcpu:)
+      # @!method initialize(autosleep_seconds:, desired_state:, machine_id:, memory_mib:, status:, storage_gib:, vcpu:)
       #   @param autosleep_seconds [Integer] Seconds of inactivity before autosleep. 0 disables autosleep.
       #
-      #   @param desired_state [Symbol, Dedalus::Models::Machine::DesiredState]
+      #   @param desired_state [Symbol, Dedalus::Models::MachineRetrieveResponse::DesiredState]
       #
       #   @param machine_id [String]
       #
       #   @param memory_mib [Integer] Memory in MiB.
       #
-      #   @param phase [Symbol, Dedalus::Models::Machine::Phase]
+      #   @param status [Dedalus::Models::LifecycleStatus]
       #
       #   @param storage_gib [Integer]
       #
       #   @param vcpu [Float] CPU in vCPUs.
 
-      # @see Dedalus::Models::Machine#desired_state
+      # @see Dedalus::Models::MachineRetrieveResponse#desired_state
       module DesiredState
         extend Dedalus::Internal::Type::Enum
 
         RUNNING = :running
         SLEEPING = :sleeping
         DESTROYED = :destroyed
-
-        # @!method self.values
-        #   @return [Array<Symbol>]
-      end
-
-      # @see Dedalus::Models::Machine#phase
-      module Phase
-        extend Dedalus::Internal::Type::Enum
-
-        ACCEPTED = :accepted
-        PLACEMENT_PENDING = :placement_pending
-        STARTING = :starting
-        RUNNING = :running
-        STOPPING = :stopping
-        SLEEPING = :sleeping
-        DESTROYING = :destroying
-        DESTROYED = :destroyed
-        FAILED = :failed
 
         # @!method self.values
         #   @return [Array<Symbol>]
