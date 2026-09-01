@@ -4,27 +4,6 @@ module Dedalus
   module Internal
     module Type
       # @api private
-      #
-      # @example
-      #   # `terminal_client_event` is a `Dedalus::Machines::TerminalClientEvent`
-      #   case terminal_client_event
-      #   when Dedalus::Machines::TerminalInputEvent
-      #     puts(terminal_client_event.data)
-      #   when Dedalus::Machines::TerminalResizeEvent
-      #     puts(terminal_client_event.height)
-      #   else
-      #     puts(terminal_client_event)
-      #   end
-      #
-      # @example
-      #   case terminal_client_event
-      #   in {type: :input, data: data}
-      #     puts(data)
-      #   in {type: :resize, height: height, width: width}
-      #     puts(height)
-      #   else
-      #     puts(terminal_client_event)
-      #   end
       module Union
         include Dedalus::Internal::Type::Converter
         include Dedalus::Internal::Util::SorbetRuntimeSupport

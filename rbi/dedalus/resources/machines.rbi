@@ -3,41 +3,32 @@
 module Dedalus
   module Resources
     class Machines
-      sig { returns(Dedalus::Resources::Machines::Artifacts) }
-      attr_reader :artifacts
-
-      sig { returns(Dedalus::Resources::Machines::Previews) }
-      attr_reader :previews
-
       sig { returns(Dedalus::Resources::Machines::SSH) }
       attr_reader :ssh
 
       sig { returns(Dedalus::Resources::Machines::Executions) }
       attr_reader :executions
 
-      sig { returns(Dedalus::Resources::Machines::Terminals) }
-      attr_reader :terminals
-
       # Create machine
       sig do
         params(
+          autosleep: String,
           memory_mib: Integer,
           storage_gib: Integer,
           vcpu: Float,
-          autosleep: String,
           request_options: Dedalus::RequestOptions::OrHash
         ).returns(Dedalus::Machine)
       end
       def create(
-        # Memory in MiB.
-        memory_mib:,
-        # Storage in GiB.
-        storage_gib:,
-        # CPU in vCPUs.
-        vcpu:,
         # Idle window before autosleep. Accepts fixed duration units like 30s, 30m, 2h,
         # 7d3h4s, or 1w3d, raw seconds ("1800"), or never to disable.
         autosleep: nil,
+        # Memory in MiB.
+        memory_mib: nil,
+        # Storage in GiB.
+        storage_gib: nil,
+        # CPU in vCPUs.
+        vcpu: nil,
         request_options: {}
       )
       end
@@ -47,7 +38,7 @@ module Dedalus
         params(
           machine_id: String,
           request_options: Dedalus::RequestOptions::OrHash
-        ).returns(Dedalus::Machine)
+        ).returns(Dedalus::Models::MachineRetrieveResponse)
       end
       def retrieve(machine_id:, request_options: {})
       end
@@ -118,26 +109,6 @@ module Dedalus
         ).returns(Dedalus::Machine)
       end
       def wake(machine_id:, request_options: {})
-      end
-
-      # Streams machine lifecycle updates over Server-Sent Events. Each `status` event
-      # contains a full `LifecycleResponse` payload. The stream closes after the machine
-      # reaches its current desired state.
-      sig do
-        params(
-          machine_id: String,
-          last_event_id: String,
-          request_options: Dedalus::RequestOptions::OrHash
-        ).returns(Dedalus::Internal::Stream[Dedalus::Machine])
-      end
-      def watch_streaming(
-        # Path param: Machine identifier.
-        machine_id:,
-        # Header param: Optional resourceVersion bookmark used to resume a previous
-        # stream.
-        last_event_id: nil,
-        request_options: {}
-      )
       end
 
       # @api private

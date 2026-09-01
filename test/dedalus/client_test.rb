@@ -33,7 +33,7 @@ class DedalusTest < Minitest::Test
     dedalus = Dedalus::Client.new(base_url: "http://localhost", api_key: "My API Key")
 
     assert_raises(Dedalus::Errors::InternalServerError) do
-      dedalus.machines.create(memory_mib: 0, storage_gib: 0, vcpu: 0)
+      dedalus.machines.create
     end
 
     assert_requested(:any, /./, times: 3)
@@ -45,7 +45,7 @@ class DedalusTest < Minitest::Test
     dedalus = Dedalus::Client.new(base_url: "http://localhost", api_key: "My API Key", max_retries: 3)
 
     assert_raises(Dedalus::Errors::InternalServerError) do
-      dedalus.machines.create(memory_mib: 0, storage_gib: 0, vcpu: 0)
+      dedalus.machines.create
     end
 
     assert_requested(:any, /./, times: 4)
@@ -57,7 +57,7 @@ class DedalusTest < Minitest::Test
     dedalus = Dedalus::Client.new(base_url: "http://localhost", api_key: "My API Key")
 
     assert_raises(Dedalus::Errors::InternalServerError) do
-      dedalus.machines.create(memory_mib: 0, storage_gib: 0, vcpu: 0, request_options: {max_retries: 3})
+      dedalus.machines.create(request_options: {max_retries: 3})
     end
 
     assert_requested(:any, /./, times: 4)
@@ -69,7 +69,7 @@ class DedalusTest < Minitest::Test
     dedalus = Dedalus::Client.new(base_url: "http://localhost", api_key: "My API Key", max_retries: 3)
 
     assert_raises(Dedalus::Errors::InternalServerError) do
-      dedalus.machines.create(memory_mib: 0, storage_gib: 0, vcpu: 0, request_options: {max_retries: 4})
+      dedalus.machines.create(request_options: {max_retries: 4})
     end
 
     assert_requested(:any, /./, times: 5)
@@ -85,7 +85,7 @@ class DedalusTest < Minitest::Test
     dedalus = Dedalus::Client.new(base_url: "http://localhost", api_key: "My API Key", max_retries: 1)
 
     assert_raises(Dedalus::Errors::InternalServerError) do
-      dedalus.machines.create(memory_mib: 0, storage_gib: 0, vcpu: 0)
+      dedalus.machines.create
     end
 
     assert_requested(:any, /./, times: 2)
@@ -105,7 +105,7 @@ class DedalusTest < Minitest::Test
 
     Thread.current.thread_variable_set(:time_now, time_now)
     assert_raises(Dedalus::Errors::InternalServerError) do
-      dedalus.machines.create(memory_mib: 0, storage_gib: 0, vcpu: 0)
+      dedalus.machines.create
     end
     Thread.current.thread_variable_set(:time_now, nil)
 
@@ -123,7 +123,7 @@ class DedalusTest < Minitest::Test
     dedalus = Dedalus::Client.new(base_url: "http://localhost", api_key: "My API Key", max_retries: 1)
 
     assert_raises(Dedalus::Errors::InternalServerError) do
-      dedalus.machines.create(memory_mib: 0, storage_gib: 0, vcpu: 0)
+      dedalus.machines.create
     end
 
     assert_requested(:any, /./, times: 2)
@@ -136,7 +136,7 @@ class DedalusTest < Minitest::Test
     dedalus = Dedalus::Client.new(base_url: "http://localhost", api_key: "My API Key")
 
     assert_raises(Dedalus::Errors::InternalServerError) do
-      dedalus.machines.create(memory_mib: 0, storage_gib: 0, vcpu: 0)
+      dedalus.machines.create
     end
 
     3.times do
@@ -150,12 +150,7 @@ class DedalusTest < Minitest::Test
     dedalus = Dedalus::Client.new(base_url: "http://localhost", api_key: "My API Key")
 
     assert_raises(Dedalus::Errors::InternalServerError) do
-      dedalus.machines.create(
-        memory_mib: 0,
-        storage_gib: 0,
-        vcpu: 0,
-        request_options: {extra_headers: {"x-stainless-retry-count" => nil}}
-      )
+      dedalus.machines.create(request_options: {extra_headers: {"x-stainless-retry-count" => nil}})
     end
 
     assert_requested(:any, /./, times: 3) do
@@ -169,12 +164,7 @@ class DedalusTest < Minitest::Test
     dedalus = Dedalus::Client.new(base_url: "http://localhost", api_key: "My API Key")
 
     assert_raises(Dedalus::Errors::InternalServerError) do
-      dedalus.machines.create(
-        memory_mib: 0,
-        storage_gib: 0,
-        vcpu: 0,
-        request_options: {extra_headers: {"x-stainless-retry-count" => "42"}}
-      )
+      dedalus.machines.create(request_options: {extra_headers: {"x-stainless-retry-count" => "42"}})
     end
 
     assert_requested(:any, /./, headers: {"x-stainless-retry-count" => "42"}, times: 3)
@@ -194,7 +184,7 @@ class DedalusTest < Minitest::Test
     dedalus = Dedalus::Client.new(base_url: "http://localhost", api_key: "My API Key")
 
     assert_raises(Dedalus::Errors::APIConnectionError) do
-      dedalus.machines.create(memory_mib: 0, storage_gib: 0, vcpu: 0, request_options: {extra_headers: {}})
+      dedalus.machines.create(request_options: {extra_headers: {}})
     end
 
     recorded, = WebMock::RequestRegistry.instance.requested_signatures.hash.first
@@ -223,7 +213,7 @@ class DedalusTest < Minitest::Test
     dedalus = Dedalus::Client.new(base_url: "http://localhost", api_key: "My API Key")
 
     assert_raises(Dedalus::Errors::APIConnectionError) do
-      dedalus.machines.create(memory_mib: 0, storage_gib: 0, vcpu: 0, request_options: {extra_headers: {}})
+      dedalus.machines.create(request_options: {extra_headers: {}})
     end
 
     assert_requested(:get, "http://localhost/redirected", times: Dedalus::Client::MAX_REDIRECTS) do
@@ -247,12 +237,7 @@ class DedalusTest < Minitest::Test
     dedalus = Dedalus::Client.new(base_url: "http://localhost", api_key: "My API Key")
 
     assert_raises(Dedalus::Errors::APIConnectionError) do
-      dedalus.machines.create(
-        memory_mib: 0,
-        storage_gib: 0,
-        vcpu: 0,
-        request_options: {extra_headers: {"authorization" => "Bearer xyz"}}
-      )
+      dedalus.machines.create(request_options: {extra_headers: {"authorization" => "Bearer xyz"}})
     end
 
     recorded, = WebMock::RequestRegistry.instance.requested_signatures.hash.first
@@ -279,12 +264,7 @@ class DedalusTest < Minitest::Test
     dedalus = Dedalus::Client.new(base_url: "http://localhost", api_key: "My API Key")
 
     assert_raises(Dedalus::Errors::APIConnectionError) do
-      dedalus.machines.create(
-        memory_mib: 0,
-        storage_gib: 0,
-        vcpu: 0,
-        request_options: {extra_headers: {"authorization" => "Bearer xyz"}}
-      )
+      dedalus.machines.create(request_options: {extra_headers: {"authorization" => "Bearer xyz"}})
     end
 
     assert_requested(:any, "https://example.com/redirected", times: Dedalus::Client::MAX_REDIRECTS) do
@@ -299,7 +279,7 @@ class DedalusTest < Minitest::Test
     dedalus = Dedalus::Client.new(base_url: "http://localhost", api_key: "My API Key")
 
     assert_raises(Dedalus::Errors::InternalServerError) do
-      dedalus.machines.create(memory_mib: 0, storage_gib: 0, vcpu: 0, request_options: {max_retries: 1})
+      dedalus.machines.create(request_options: {max_retries: 1})
     end
 
     headers = []
@@ -318,12 +298,7 @@ class DedalusTest < Minitest::Test
     dedalus = Dedalus::Client.new(base_url: "http://localhost", api_key: "My API Key")
 
     assert_raises(Dedalus::Errors::InternalServerError) do
-      dedalus.machines.create(
-        memory_mib: 0,
-        storage_gib: 0,
-        vcpu: 0,
-        request_options: {max_retries: 1, idempotency_key: "user-supplied-key"}
-      )
+      dedalus.machines.create(request_options: {max_retries: 1, idempotency_key: "user-supplied-key"})
     end
 
     assert_requested(
@@ -339,7 +314,7 @@ class DedalusTest < Minitest::Test
 
     dedalus = Dedalus::Client.new(base_url: "http://localhost", api_key: "My API Key")
 
-    dedalus.machines.create(memory_mib: 0, storage_gib: 0, vcpu: 0)
+    dedalus.machines.create
 
     assert_requested(:any, /./) do |req|
       headers = req.headers.transform_keys(&:downcase)

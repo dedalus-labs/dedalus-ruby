@@ -1,6 +1,6 @@
 # Dedalus Ruby API library
 
-The Dedalus Ruby library provides convenient access to the Dedalus REST API from any Ruby 3.2.0+ application. It ships with comprehensive types & docstrings in Yard, RBS, and RBI – [see below](https://github.com/stainless-sdks/dedalus-ruby#Sorbet) for usage with Sorbet. The standard library's `net/http` is used as the HTTP transport, with connection pooling via the `connection_pool` gem.
+The Dedalus Ruby library provides convenient access to the Dedalus REST API from any Ruby 3.2.0+ application. It ships with comprehensive types & docstrings in Yard, RBS, and RBI – [see below](https://github.com/dedalus-labs/dedalus-ruby#Sorbet) for usage with Sorbet. The standard library's `net/http` is used as the HTTP transport, with connection pooling via the `connection_pool` gem.
 
 It is generated with [Stainless](https://www.stainless.com/).
 
@@ -23,9 +23,13 @@ The REST API documentation can be found on [docs.dedaluslabs.ai](https://docs.de
 
 To use this gem, install via Bundler by adding the following to your application's `Gemfile`:
 
+<!-- x-release-please-start-version -->
+
 ```ruby
-gem "dedalus", "~> 0.0.1"
+gem "dedalus", "~> 0.1.0"
 ```
+
+<!-- x-release-please-end -->
 
 ## Usage
 
@@ -40,18 +44,6 @@ dedalus = Dedalus::Client.new(
 machine = dedalus.machines.create(memory_mib: 2048, storage_gib: 10, vcpu: 1)
 
 puts(machine.machine_id)
-```
-
-### Streaming
-
-We provide support for streaming responses using Server-Sent Events (SSE).
-
-```ruby
-stream = dedalus.machines.watch_streaming
-
-stream.each do |machine|
-  puts(machine.machine_id)
-end
 ```
 
 ### Pagination
@@ -244,25 +236,23 @@ dedalus.machines.create(**params)
 Since this library does not depend on `sorbet-runtime`, it cannot provide [`T::Enum`](https://sorbet.org/docs/tenum) instances. Instead, we provide "tagged symbols" instead, which is always a primitive at runtime:
 
 ```ruby
-# :http
-puts(Dedalus::Machines::PreviewCreateParams::Protocol::HTTP)
+# :accepted
+puts(Dedalus::LifecycleStatus::Phase::ACCEPTED)
 
-# Revealed type: `T.all(Dedalus::Machines::PreviewCreateParams::Protocol, Symbol)`
-T.reveal_type(Dedalus::Machines::PreviewCreateParams::Protocol::HTTP)
+# Revealed type: `T.all(Dedalus::LifecycleStatus::Phase, Symbol)`
+T.reveal_type(Dedalus::LifecycleStatus::Phase::ACCEPTED)
 ```
 
 Enum parameters have a "relaxed" type, so you can either pass in enum constants or their literal value:
 
 ```ruby
-# Using the enum constants preserves the tagged type information:
-dedalus.machines.previews.create(
-  protocol: Dedalus::Machines::PreviewCreateParams::Protocol::HTTP,
+Dedalus::LifecycleStatus.new(
+  phase: Dedalus::LifecycleStatus::Phase::ACCEPTED,
   # …
 )
 
-# Literal values are also permissible:
-dedalus.machines.previews.create(
-  protocol: :http,
+Dedalus::LifecycleStatus.new(
+  phase: :accepted,
   # …
 )
 ```
@@ -279,4 +269,4 @@ Ruby 3.2.0 or higher.
 
 ## Contributing
 
-See [the contributing documentation](https://github.com/stainless-sdks/dedalus-ruby/tree/main/CONTRIBUTING.md).
+See [the contributing documentation](https://github.com/dedalus-labs/dedalus-ruby/tree/main/CONTRIBUTING.md).

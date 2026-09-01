@@ -31,10 +31,10 @@ module Dedalus
       #   @return [Integer]
       required :memory_mib, Integer
 
-      # @!attribute status
+      # @!attribute phase
       #
-      #   @return [Dedalus::Models::LifecycleStatus]
-      required :status, -> { Dedalus::LifecycleStatus }
+      #   @return [Symbol, Dedalus::Models::MachineListItem::Phase]
+      required :phase, enum: -> { Dedalus::MachineListItem::Phase }
 
       # @!attribute storage_gib
       #
@@ -47,7 +47,7 @@ module Dedalus
       #   @return [Float]
       required :vcpu, Float
 
-      # @!method initialize(autosleep_seconds:, created_at:, desired_state:, machine_id:, memory_mib:, status:, storage_gib:, vcpu:)
+      # @!method initialize(autosleep_seconds:, created_at:, desired_state:, machine_id:, memory_mib:, phase:, storage_gib:, vcpu:)
       #   @param autosleep_seconds [Integer] Seconds of inactivity before autosleep. 0 disables autosleep.
       #
       #   @param created_at [Time]
@@ -58,7 +58,7 @@ module Dedalus
       #
       #   @param memory_mib [Integer] Memory in MiB.
       #
-      #   @param status [Dedalus::Models::LifecycleStatus]
+      #   @param phase [Symbol, Dedalus::Models::MachineListItem::Phase]
       #
       #   @param storage_gib [Integer]
       #
@@ -71,6 +71,24 @@ module Dedalus
         RUNNING = :running
         SLEEPING = :sleeping
         DESTROYED = :destroyed
+
+        # @!method self.values
+        #   @return [Array<Symbol>]
+      end
+
+      # @see Dedalus::Models::MachineListItem#phase
+      module Phase
+        extend Dedalus::Internal::Type::Enum
+
+        ACCEPTED = :accepted
+        PLACEMENT_PENDING = :placement_pending
+        STARTING = :starting
+        RUNNING = :running
+        STOPPING = :stopping
+        SLEEPING = :sleeping
+        DESTROYING = :destroying
+        DESTROYED = :destroyed
+        FAILED = :failed
 
         # @!method self.values
         #   @return [Array<Symbol>]

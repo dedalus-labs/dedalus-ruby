@@ -3,27 +3,20 @@
 module Dedalus
   module Resources
     class Machines
-      # @return [Dedalus::Resources::Machines::Artifacts]
-      attr_reader :artifacts
-
-      # @return [Dedalus::Resources::Machines::Previews]
-      attr_reader :previews
-
       # @return [Dedalus::Resources::Machines::SSH]
       attr_reader :ssh
 
       # @return [Dedalus::Resources::Machines::Executions]
       attr_reader :executions
 
-      # @return [Dedalus::Resources::Machines::Terminals]
-      attr_reader :terminals
-
       # Some parameter documentations has been truncated, see
       # {Dedalus::Models::MachineCreateParams} for more details.
       #
       # Create machine
       #
-      # @overload create(memory_mib:, storage_gib:, vcpu:, autosleep: nil, request_options: {})
+      # @overload create(autosleep: nil, memory_mib: nil, storage_gib: nil, vcpu: nil, request_options: {})
+      #
+      # @param autosleep [String] Idle window before autosleep. Accepts fixed duration units like 30s, 30m, 2h, 7d
       #
       # @param memory_mib [Integer] Memory in MiB.
       #
@@ -31,14 +24,12 @@ module Dedalus
       #
       # @param vcpu [Float] CPU in vCPUs.
       #
-      # @param autosleep [String] Idle window before autosleep. Accepts fixed duration units like 30s, 30m, 2h, 7d
-      #
       # @param request_options [Dedalus::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [Dedalus::Models::Machine]
       #
       # @see Dedalus::Models::MachineCreateParams
-      def create(params)
+      def create(params = {})
         parsed, options = Dedalus::MachineCreateParams.dump_request(params)
         @client.request(
           method: :post,
@@ -56,7 +47,7 @@ module Dedalus
       # @param machine_id [String]
       # @param request_options [Dedalus::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Dedalus::Models::Machine]
+      # @return [Dedalus::Models::MachineRetrieveResponse]
       #
       # @see Dedalus::Models::MachineRetrieveParams
       def retrieve(params)
@@ -68,7 +59,7 @@ module Dedalus
         @client.request(
           method: :get,
           path: ["v1/machines/%1$s", machine_id],
-          model: Dedalus::Machine,
+          model: Dedalus::Models::MachineRetrieveResponse,
           options: options
         )
       end
@@ -206,56 +197,13 @@ module Dedalus
         )
       end
 
-      # Some parameter documentations has been truncated, see
-      # {Dedalus::Models::MachineWatchParams} for more details.
-      #
-      # Streams machine lifecycle updates over Server-Sent Events. Each `status` event
-      # contains a full `LifecycleResponse` payload. The stream closes after the machine
-      # reaches its current desired state.
-      #
-      # @overload watch_streaming(machine_id:, last_event_id: nil, request_options: {})
-      #
-      # @param machine_id [String] Path param: Machine identifier.
-      #
-      # @param last_event_id [String] Header param: Optional resourceVersion bookmark used to resume a previous stream
-      #
-      # @param request_options [Dedalus::RequestOptions, Hash{Symbol=>Object}, nil]
-      #
-      # @return [Dedalus::Internal::Stream<Dedalus::Models::Machine>]
-      #
-      # @see Dedalus::Models::MachineWatchParams
-      def watch_streaming(params)
-        parsed, options = Dedalus::MachineWatchParams.dump_request(params)
-        machine_id =
-          parsed.delete(:machine_id) do
-            raise ArgumentError.new("missing required path argument #{_1}")
-          end
-        @client.request(
-          method: :get,
-          path: ["v1/machines/%1$s/status/stream", machine_id],
-          headers: {
-            "accept" => "text/event-stream",
-            "accept-encoding" => "identity",
-            **parsed
-          }.transform_keys(
-            last_event_id: "last-event-id"
-          ),
-          stream: Dedalus::Internal::Stream,
-          model: Dedalus::Machine,
-          options: options
-        )
-      end
-
       # @api private
       #
       # @param client [Dedalus::Client]
       def initialize(client:)
         @client = client
-        @artifacts = Dedalus::Resources::Machines::Artifacts.new(client: client)
-        @previews = Dedalus::Resources::Machines::Previews.new(client: client)
         @ssh = Dedalus::Resources::Machines::SSH.new(client: client)
         @executions = Dedalus::Resources::Machines::Executions.new(client: client)
-        @terminals = Dedalus::Resources::Machines::Terminals.new(client: client)
       end
     end
   end
