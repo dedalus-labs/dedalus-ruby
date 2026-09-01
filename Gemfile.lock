@@ -11,7 +11,7 @@ GIT
 PATH
   remote: .
   specs:
-    dedalus (0.0.1)
+    dedalus (0.1.0)
       cgi
       connection_pool
 
