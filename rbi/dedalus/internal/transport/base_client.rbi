@@ -49,15 +49,7 @@ module Dedalus
                     ]
                   ]
                 ),
-              stream:
-                T.nilable(
-                  T::Class[
-                    Dedalus::Internal::Type::BaseStream[
-                      T.anything,
-                      Dedalus::Internal::Type::BaseModel
-                    ]
-                  ]
-                ),
+              stream: T.nilable(T::Class[T.anything]),
               model: T.nilable(Dedalus::Internal::Type::Converter::Input),
               options: T.nilable(Dedalus::RequestOptions::OrHash)
             }
@@ -276,15 +268,7 @@ module Dedalus
                   ]
                 ]
               ),
-            stream:
-              T.nilable(
-                T::Class[
-                  Dedalus::Internal::Type::BaseStream[
-                    T.anything,
-                    Dedalus::Internal::Type::BaseModel
-                  ]
-                ]
-              ),
+            stream: T.nilable(T::Class[T.anything]),
             model: T.nilable(Dedalus::Internal::Type::Converter::Input),
             options: T.nilable(Dedalus::RequestOptions::OrHash)
           ).returns(T.anything)

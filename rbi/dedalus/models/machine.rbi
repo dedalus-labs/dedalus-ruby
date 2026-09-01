@@ -20,11 +20,8 @@ module Dedalus
       sig { returns(Integer) }
       attr_accessor :memory_mib
 
-      sig { returns(Dedalus::LifecycleStatus) }
-      attr_reader :status
-
-      sig { params(status: Dedalus::LifecycleStatus::OrHash).void }
-      attr_writer :status
+      sig { returns(Dedalus::Machine::Phase::TaggedSymbol) }
+      attr_accessor :phase
 
       sig { returns(Integer) }
       attr_accessor :storage_gib
@@ -39,7 +36,7 @@ module Dedalus
           desired_state: Dedalus::Machine::DesiredState::OrSymbol,
           machine_id: String,
           memory_mib: Integer,
-          status: Dedalus::LifecycleStatus::OrHash,
+          phase: Dedalus::Machine::Phase::OrSymbol,
           storage_gib: Integer,
           vcpu: Float
         ).returns(T.attached_class)
@@ -51,7 +48,7 @@ module Dedalus
         machine_id:,
         # Memory in MiB.
         memory_mib:,
-        status:,
+        phase:,
         storage_gib:,
         # CPU in vCPUs.
         vcpu:
@@ -65,7 +62,7 @@ module Dedalus
             desired_state: Dedalus::Machine::DesiredState::TaggedSymbol,
             machine_id: String,
             memory_mib: Integer,
-            status: Dedalus::LifecycleStatus,
+            phase: Dedalus::Machine::Phase::TaggedSymbol,
             storage_gib: Integer,
             vcpu: Float
           }
@@ -91,6 +88,30 @@ module Dedalus
           override.returns(
             T::Array[Dedalus::Machine::DesiredState::TaggedSymbol]
           )
+        end
+        def self.values
+        end
+      end
+
+      module Phase
+        extend Dedalus::Internal::Type::Enum
+
+        TaggedSymbol = T.type_alias { T.all(Symbol, Dedalus::Machine::Phase) }
+        OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+        ACCEPTED = T.let(:accepted, Dedalus::Machine::Phase::TaggedSymbol)
+        PLACEMENT_PENDING =
+          T.let(:placement_pending, Dedalus::Machine::Phase::TaggedSymbol)
+        STARTING = T.let(:starting, Dedalus::Machine::Phase::TaggedSymbol)
+        RUNNING = T.let(:running, Dedalus::Machine::Phase::TaggedSymbol)
+        STOPPING = T.let(:stopping, Dedalus::Machine::Phase::TaggedSymbol)
+        SLEEPING = T.let(:sleeping, Dedalus::Machine::Phase::TaggedSymbol)
+        DESTROYING = T.let(:destroying, Dedalus::Machine::Phase::TaggedSymbol)
+        DESTROYED = T.let(:destroyed, Dedalus::Machine::Phase::TaggedSymbol)
+        FAILED = T.let(:failed, Dedalus::Machine::Phase::TaggedSymbol)
+
+        sig do
+          override.returns(T::Array[Dedalus::Machine::Phase::TaggedSymbol])
         end
         def self.values
         end

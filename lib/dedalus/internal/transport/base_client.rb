@@ -554,7 +554,7 @@ module Dedalus
                 )
               ),
               page: T.nilable(T::Class[Dedalus::Internal::Type::BasePage[Dedalus::Internal::Type::BaseModel]]),
-              stream: T.nilable(T::Class[Dedalus::Internal::Type::BaseStream[T.anything, Dedalus::Internal::Type::BaseModel]]),
+              stream: T.nilable(T::Class[T.anything]),
               model: T.nilable(Dedalus::Internal::Type::Converter::Input),
               options: T.nilable(Dedalus::RequestOptions::OrHash)
             }

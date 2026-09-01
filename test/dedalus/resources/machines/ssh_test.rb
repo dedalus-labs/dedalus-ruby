@@ -4,7 +4,11 @@ require_relative "../../test_helper"
 
 class Dedalus::Test::Resources::Machines::SSHTest < Dedalus::Test::ResourceTest
   def test_create_required_params
-    response = @dedalus.machines.ssh.create(machine_id: "dm-3", public_key: "public_key")
+    response =
+      @dedalus.machines.ssh.create(
+        machine_id: "dm-ecc2efdd-ddfa-31a9-c6f1-b833d337aa7c",
+        public_key: "public_key"
+      )
 
     assert_pattern do
       response => Dedalus::Machines::SSHSession
@@ -27,7 +31,11 @@ class Dedalus::Test::Resources::Machines::SSHTest < Dedalus::Test::ResourceTest
   end
 
   def test_retrieve_required_params
-    response = @dedalus.machines.ssh.retrieve(machine_id: "dm-3", session_id: "session_id")
+    response =
+      @dedalus.machines.ssh.retrieve(
+        machine_id: "dm-ecc2efdd-ddfa-31a9-c6f1-b833d337aa7c",
+        session_id: "session_id"
+      )
 
     assert_pattern do
       response => Dedalus::Machines::SSHSession
@@ -50,7 +58,7 @@ class Dedalus::Test::Resources::Machines::SSHTest < Dedalus::Test::ResourceTest
   end
 
   def test_list_required_params
-    response = @dedalus.machines.ssh.list(machine_id: "dm-3")
+    response = @dedalus.machines.ssh.list(machine_id: "dm-ecc2efdd-ddfa-31a9-c6f1-b833d337aa7c")
 
     assert_pattern do
       response => Dedalus::Internal::CursorPage
@@ -80,7 +88,11 @@ class Dedalus::Test::Resources::Machines::SSHTest < Dedalus::Test::ResourceTest
   end
 
   def test_delete_required_params
-    response = @dedalus.machines.ssh.delete(machine_id: "dm-3", session_id: "session_id")
+    response =
+      @dedalus.machines.ssh.delete(
+        machine_id: "dm-ecc2efdd-ddfa-31a9-c6f1-b833d337aa7c",
+        session_id: "session_id"
+      )
 
     assert_pattern do
       response => Dedalus::Machines::SSHSession

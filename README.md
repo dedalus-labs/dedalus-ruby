@@ -46,18 +46,6 @@ machine = dedalus.machines.create(memory_mib: 2048, storage_gib: 10, vcpu: 1)
 puts(machine.machine_id)
 ```
 
-### Streaming
-
-We provide support for streaming responses using Server-Sent Events (SSE).
-
-```ruby
-stream = dedalus.machines.watch_streaming
-
-stream.each do |machine|
-  puts(machine.machine_id)
-end
-```
-
 ### Pagination
 
 List methods in the Dedalus API are paginated.
@@ -248,25 +236,23 @@ dedalus.machines.create(**params)
 Since this library does not depend on `sorbet-runtime`, it cannot provide [`T::Enum`](https://sorbet.org/docs/tenum) instances. Instead, we provide "tagged symbols" instead, which is always a primitive at runtime:
 
 ```ruby
-# :http
-puts(Dedalus::Machines::PreviewCreateParams::Protocol::HTTP)
+# :accepted
+puts(Dedalus::LifecycleStatus::Phase::ACCEPTED)
 
-# Revealed type: `T.all(Dedalus::Machines::PreviewCreateParams::Protocol, Symbol)`
-T.reveal_type(Dedalus::Machines::PreviewCreateParams::Protocol::HTTP)
+# Revealed type: `T.all(Dedalus::LifecycleStatus::Phase, Symbol)`
+T.reveal_type(Dedalus::LifecycleStatus::Phase::ACCEPTED)
 ```
 
 Enum parameters have a "relaxed" type, so you can either pass in enum constants or their literal value:
 
 ```ruby
-# Using the enum constants preserves the tagged type information:
-dedalus.machines.previews.create(
-  protocol: Dedalus::Machines::PreviewCreateParams::Protocol::HTTP,
+Dedalus::LifecycleStatus.new(
+  phase: Dedalus::LifecycleStatus::Phase::ACCEPTED,
   # …
 )
 
-# Literal values are also permissible:
-dedalus.machines.previews.create(
-  protocol: :http,
+Dedalus::LifecycleStatus.new(
+  phase: :accepted,
   # …
 )
 ```

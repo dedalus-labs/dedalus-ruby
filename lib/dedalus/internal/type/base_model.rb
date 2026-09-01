@@ -438,11 +438,11 @@ module Dedalus
         # @return [Hash{Symbol=>Object}]
         #
         # @example
-        #   # `machine_compute_usage` is a `Dedalus::MachineComputeUsage`
-        #   machine_compute_usage => {
-        #     granularity: granularity,
-        #     period_end: period_end,
-        #     period_start: period_start
+        #   # `create_params` is a `Dedalus::CreateParams`
+        #   create_params => {
+        #     autosleep: autosleep,
+        #     memory_mib: memory_mib,
+        #     storage_gib: storage_gib
         #   }
         def deconstruct_keys(keys)
           (keys || self.class.known_fields.keys)

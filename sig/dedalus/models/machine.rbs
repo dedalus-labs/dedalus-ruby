@@ -6,7 +6,7 @@ module Dedalus
         desired_state: Dedalus::Models::Machine::desired_state,
         machine_id: String,
         memory_mib: Integer,
-        status: Dedalus::LifecycleStatus,
+        phase: Dedalus::Models::Machine::phase,
         storage_gib: Integer,
         vcpu: Float
       }
@@ -20,7 +20,7 @@ module Dedalus
 
       attr_accessor memory_mib: Integer
 
-      attr_accessor status: Dedalus::LifecycleStatus
+      attr_accessor phase: Dedalus::Models::Machine::phase
 
       attr_accessor storage_gib: Integer
 
@@ -31,7 +31,7 @@ module Dedalus
         desired_state: Dedalus::Models::Machine::desired_state,
         machine_id: String,
         memory_mib: Integer,
-        status: Dedalus::LifecycleStatus,
+        phase: Dedalus::Models::Machine::phase,
         storage_gib: Integer,
         vcpu: Float
       ) -> void
@@ -41,7 +41,7 @@ module Dedalus
         desired_state: Dedalus::Models::Machine::desired_state,
         machine_id: String,
         memory_mib: Integer,
-        status: Dedalus::LifecycleStatus,
+        phase: Dedalus::Models::Machine::phase,
         storage_gib: Integer,
         vcpu: Float
       }
@@ -56,6 +56,33 @@ module Dedalus
         DESTROYED: :destroyed
 
         def self?.values: -> ::Array[Dedalus::Models::Machine::desired_state]
+      end
+
+      type phase =
+        :accepted
+        | :placement_pending
+        | :starting
+        | :running
+        | :stopping
+        | :sleeping
+        | :destroying
+        | :destroyed
+        | :failed
+
+      module Phase
+        extend Dedalus::Internal::Type::Enum
+
+        ACCEPTED: :accepted
+        PLACEMENT_PENDING: :placement_pending
+        STARTING: :starting
+        RUNNING: :running
+        STOPPING: :stopping
+        SLEEPING: :sleeping
+        DESTROYING: :destroying
+        DESTROYED: :destroyed
+        FAILED: :failed
+
+        def self?.values: -> ::Array[Dedalus::Models::Machine::phase]
       end
     end
   end
